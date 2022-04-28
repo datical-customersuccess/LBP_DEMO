@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
+
+ <include file="sqlfiles/ae/ddl/jobs_table.sql" labels="v1.0"/>
+ <include file="sqlfiles/ae/data_dml/jobs_data.sql" labels="v1.0"/>
+ <changeSet author="releaseMgr"  id="tag_v1.0" labels="v1.0">
+    <tagDatabase tag="v1.0"/>
+  </changeSet>
+
+
+ <include file="sqlfiles/ae/ddl/employees_table.sql" labels="v2.0"/>
+ <include file="sqlfiles/ae/stored_logic/dept_salary.sql" labels="v2.0"/>
+ <include file="sqlfiles/ae/stored_logic/top_employees_v.sql" labels="v2.0"/>
+ <changeSet author="releaseMgr"  id="tag_v2.0" labels="v2.0">
+    <tagDatabase tag="v2.0"/>
+  </changeSet>
+
+</databaseChangeLog>

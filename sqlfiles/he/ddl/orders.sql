@@ -1,0 +1,10 @@
+-- liquibase formatted sql  
+-- changeset AmyS:orders_table
+CREATE TABLE ORDERS
+( 
+  ORDER_ID VARCHAR(10 BYTE) NOT NULL, 
+  MIN_PURCHASE NUMBER(6, 0),
+  MAX_PURCHASE NUMBER(6, 0),
+  CONSTRAINT ORDER_ID_PK PRIMARY KEY (ORDER_ID)
+)
+;
