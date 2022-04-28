@@ -6,27 +6,15 @@ export LIQUIBASE_COMMAND_PASSWORD=liquibase
 export LIQUIBASE_LIQUIBASE_SCHEMA_NAME=LIQUIBASE
 export LIQUIBASE_COMMAND_CHANGELOG_FILE=./changelogs/dbchangelog.xml
 
-# Build commands
+
 # Check for errors in the changelogs
 liquibase validate
 # Optional - Run quality checks
 #liquibase checks run
-
 # Deploy commands
-# Log the changesets to be deployed for each schema in this release
-export LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME=AE
-liquibase status --contexts=ae --labels=v1.0 --verbose
-export LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME=HE
-liquibase status --contexts=he --labels=v1.0 --verbose
-
-# Log the SQL that will be run for each schema in this release
-export LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME=AE
-liquibase update-sql --default-schema-name=AE --contexts=AE --labels=v1.0
-export LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME=HE
-liquibase update-sql --default-schema-name=HE --contexts=HE --labels=v1.0
-
+# Log the changesets in this sprint deploy
+liquibase status --verbose --labels="teamA_st1000,teamB_st2000"
+# Log the SQL that will be run in this release
+liquibase update-sql --labels="teamA_st1000,teamB_st2000"
 # Update the schemas for this release
-export LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME=AE
-liquibase update --default-schema-name=AE --contexts=AE --labels=v1.0
-export LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME=HE
-liquibase update --default-schema-name=HE --contexts=HE --labels=v1.0
+liquibase update --labels="teamA_st1000,teamB_st2000"

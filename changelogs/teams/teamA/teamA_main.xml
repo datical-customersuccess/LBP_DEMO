@@ -7,10 +7,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
 
-  <include file="./sql_code/st1000/file1.sql"/>
-  <include file="./sql_code/st1000/file2.sql"/>
-  
-  <include file="./sql_code/st1001/file1.sql"/>
-  <include file="./sql_code/st1001/file2.sql"/>
+  <include file="./changelogs/teams/teamA/teamA_st1000.xml" labels="teamA_st1000"/>
+  <include file="./changelogs/teams/teamA/teamA_st1001.xml" labels="teamA_st1001"/>
 
 </databaseChangeLog>

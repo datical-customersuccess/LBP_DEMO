@@ -7,8 +7,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
 
-  <include file="./changelogs/releases/teams/teamB/rel22_04_20.xml"/>
-  <include file="./changelogs/releases/teams/teamB/rel22_05_25.xml"/>
-  <include file="./changelogs/releases/teams/teamB/rel22_06_29.xml"/>
+  <include file="./changelogs/teams/teamA/teamB_st2000.xml" labels="teamB_st2000"/>
+  <include file="./changelogs/teams/teamA/teamB_st2001.xml" labels="teamB_st2001"/>
 
 </databaseChangeLog>
