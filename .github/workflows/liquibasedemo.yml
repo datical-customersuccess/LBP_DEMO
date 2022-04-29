@@ -9,7 +9,7 @@ jobs:
     name: Run Liquibase Status
     steps:
       - uses: actions/checkout@v2
-      - uses: liquibase/liquibase-github-action@v2
+      - uses: liquibase/liquibase-github-action@v4
         with:
           operation: 'status'
           classpath: 'changelogs'
