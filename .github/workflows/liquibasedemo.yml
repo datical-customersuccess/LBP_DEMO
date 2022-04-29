@@ -1,0 +1,19 @@
+on:
+  push:
+     branches:
+       - stories
+
+jobs:
+  liquibase_status:
+    runs-on: ubuntu-latest
+    name: Run Liquibase Status
+    steps:
+      - uses: actions/checkout@v2
+      - uses: liquibase/liquibase-github-action@v2
+        with:
+          operation: 'status'
+          classpath: 'changelogs'
+          changeLogFile: 'dbchangelog.xml'
+          username: liquibase
+          password: liquibase
+          url: oracle:thin:@demo-db1-rhel6.datical.net:1521/mmb_multi.datical.net
