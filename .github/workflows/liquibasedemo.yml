@@ -9,11 +9,6 @@ jobs:
     name: Run Liquibase Status
     steps:
       - uses: actions/checkout@v2
-      - uses: liquibase/liquibase-github-action@v4
+      - uses: docker://liquibase/liquibase
         with:
-          operation: 'status'
-          classpath: 'changelogs'
-          changeLogFile: 'dbchangelog.xml'
-          username: liquibase
-          password: liquibase
-          url: oracle:thin:@demo-db1-rhel6.datical.net:1521/mmb_multi.datical.net
+          args:  status --verbose
