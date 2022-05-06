@@ -31,17 +31,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Running Quality Checks
-      uses: docker://liquibase/liquibase
-      with:
-        args: checks run
+#    - name: Running Quality Checks
+#      uses: docker://liquibase/liquibase
+#      with:
+#        args: checks run
         
     - name: Reviewing pending SQL changes
       uses: docker://liquibase/liquibase
       with:
         args: status --verbose --log-level=info
     
-    - name: Validating Database Changes
-      uses: docker://liquibase/liquibase
-      with:
-        args: update
+#    - name: Validating Database Changes
+#      uses: docker://liquibase/liquibase
+#      with:
+#        args: update
