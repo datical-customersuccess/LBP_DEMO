@@ -9,7 +9,7 @@ env:
   LIQUIBASE_COMMAND_PASSWORD: ${{secrets.LIQUIBASE_COMMAND_PASSWORD}}
   LIQUIBASE_COMMAND_URL: ${{secrets.LIQUIBASE_COMMAND_URL}}
   ## 
-  LIQUIBASE_COMMAND_CHANGELOG_FILE: ./changelogs/dbhcnagelog.xml
+  LIQUIBASE_COMMAND_CHANGELOG_FILE: ./changelogs/dbchangelog.xml
   ## LIQUIBASE_LOG_LEVEL: FINE
 
 # Controls when the workflow will run
