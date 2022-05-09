@@ -1,0 +1,48 @@
+# This is a sample build script showing how environment variables can be set from a vault
+
+name: LiquibaseProDeploy
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description:  'Environment for deploy'
+        required:  true
+        default:  'TEST'
+        type:  choice
+        options:
+        - TEST
+        - PROD
+
+env:
+  ## Set environment variables
+  LIQUIBASE_PRO_LICENSE_KEY: ${{secrets.LIQUIBASE_PRO_LICENSE_KEY}}
+  LIQUIBASE_COMMAND_USERNAME: ${{secrets.LIQUIBASE_COMMAND_USERNAME}}
+  LIQUIBASE_COMMAND_PASSWORD: ${{secrets.LIQUIBASE_COMMAND_PASSWORD}}
+  LIQUIBASE_COMMAND_URL: ${{secrets.LIQUIBASE_COMMAND_URL}}
+  ## 
+  LIQUIBASE_COMMAND_CHANGELOG_FILE: ./changelogs/dbchangelog.xml
+  ## LIQUIBASE_LOG_LEVEL: FINE
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  Build_Job:
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ github.event.inputs.environment }}
+
+    steps:
+    - uses: actions/checkout@v3
+        
+    - name: Review pending SQL changes
+      uses: docker://liquibase/liquibase
+      with:
+        args: status --verbose --log-level=info
+    
+#    - name: Deploy SQL changes to DEV
+#      uses: docker://liquibase/liquibase
+#      with:
+#        args: update
