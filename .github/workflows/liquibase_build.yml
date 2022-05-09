@@ -36,7 +36,7 @@ jobs:
     - name: Validate changelogs
       uses: docker://liquibase/liquibase
       with:
-        args: checks run
+        args: validate
         
     - name: Run Quality Checks
       uses: docker://liquibase/liquibase
