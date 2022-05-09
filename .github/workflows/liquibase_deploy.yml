@@ -29,7 +29,7 @@ env:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  Build_Job:
+  Deploy_Job:
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.event.inputs.environment }}
@@ -42,7 +42,7 @@ jobs:
       with:
         args: status --verbose --log-level=info
     
-#    - name: Deploy SQL changes to DEV
+#    - name: Deploy SQL changes
 #      uses: docker://liquibase/liquibase
 #      with:
 #        args: update
