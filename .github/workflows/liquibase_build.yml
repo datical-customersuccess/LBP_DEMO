@@ -1,0 +1,66 @@
+# This is a sample build script showing how to deploy to multiple schemas using --default-schema-name and --contexts
+
+name: LiquibaseProBuild
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the cicd branch
+  push:
+    branches: [ schemas ]
+  pull_request:
+    branches: [ schemas ]
+
+env:
+  ## Set environment variables
+  ## These variables are set at the Repo level
+  LIQUIBASE_PRO_LICENSE_KEY: ${{secrets.LIQUIBASE_PRO_LICENSE_KEY}}
+  LIQUIBASE_COMMAND_USERNAME: ${{secrets.LIQUIBASE_COMMAND_USERNAME}}
+  LIQUIBASE_COMMAND_PASSWORD: ${{secrets.LIQUIBASE_COMMAND_PASSWORD}}
+  ##
+  ## The database URL is set at the Environment level
+  LIQUIBASE_COMMAND_URL: ${{secrets.LIQUIBASE_COMMAND_URL}}
+  ## 
+  LIQUIBASE_COMMAND_CHANGELOG_FILE: ./changelogs/dbchangelog.xml
+  ## LIQUIBASE_LOG_LEVEL: FINE
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  Build_Job:
+    runs-on: ubuntu-latest
+    environment: 
+      name: DEV
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Validate changelogs
+      uses: docker://liquibase/liquibase
+      with:
+        args: validate
+        
+    - name: Run Quality Checks
+      uses: docker://liquibase/liquibase
+      with:
+        args: checks run
+        
+    - name: Review pending SQL changes for the AE schema
+      uses: docker://liquibase/liquibase
+      with:
+        args: status --verbose --log-level=info --contexts=AE --default-schema-name=AE
+        
+    - name: Review pending SQL changes for the HE schema
+      uses: docker://liquibase/liquibase
+      with:
+        args: status --verbose --log-level=info --contexts=HE --default-schema-name=HE
+    
+#    - name: Deploy AE schema changes to DEV
+#      uses: docker://liquibase/liquibase
+#      with:
+#        args: update --contexts=AE --default-schema-name=AE
+
+#    - name: Deploy HE schema changes to DEV
+#      uses: docker://liquibase/liquibase
+#      with:
+#        args: update --contexts=HE --default-schema-name=HE
