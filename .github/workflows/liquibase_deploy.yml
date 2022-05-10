@@ -1,4 +1,4 @@
-# This is a sample deploy script.
+# This is a sample deploy script for multiple schemas.
 
 name: LiquibaseProDeploy
 
@@ -41,7 +41,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
         
-   - name: Review pending SQL changes for the AE schema
+    - name: Review pending SQL changes for the AE schema
       uses: docker://liquibase/liquibase
       with:
         args: status --verbose --log-level=info --contexts=AE --default-schema-name=AE
