@@ -6,9 +6,9 @@ name: LiquibaseProBuild
 on:
   # Triggers the workflow on push or pull request events but only for the cicd branch
   push:
-    branches: [ cicd ]
+    branches: [ jfrog ]
   pull_request:
-    branches: [ cicd ]
+    branches: [ jfrog ]
 
 env:
   ## Set environment variables
