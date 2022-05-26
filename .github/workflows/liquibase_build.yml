@@ -32,8 +32,8 @@ jobs:
     container:
       image: lbdemo.jfrog.io/lblocal/liquibase
       credentials:
-        username: mbohls@datical.com
-        password:  Vaman0s;
+        username: 
+        password:  
     environment: 
       name: DEV
 
