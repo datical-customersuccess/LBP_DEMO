@@ -29,6 +29,11 @@ jobs:
 
   Build_Job:
     runs-on: ubuntu-latest
+    container:
+      image: lbdemo.jfrog.io/lblocal/liquibase
+      credentials:
+        username: mbohls@datical.com
+        password:  Vaman0s;
     environment: 
       name: DEV
 
@@ -36,19 +41,21 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Validate changelogs
-      uses: docker://liquibase/liquibase
-      with:
-        args: validate
+      run: liquibase validate
+      
+#      uses: docker://liquibase/liquibase
+#     with:
+#        args: validate
         
-    - name: Run Quality Checks
-      uses: docker://liquibase/liquibase
-      with:
-        args: checks run
+#    - name: Run Quality Checks
+#      uses: docker://liquibase/liquibase
+#      with:
+#        args: checks run
         
-    - name: Review pending SQL changes
-      uses: docker://liquibase/liquibase
-      with:
-        args: status --verbose --log-level=info
+#    - name: Review pending SQL changes
+#      uses: docker://liquibase/liquibase
+#      with:
+#        args: status --verbose --log-level=info
     
 #    - name: Deploy SQL changes to DEV
 #      uses: docker://liquibase/liquibase
