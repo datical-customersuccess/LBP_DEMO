@@ -49,21 +49,5 @@ jobs:
     - name:  Review Pending SQL Changes
       run:  liquibase status --verbose --log-level=info
       
-#      uses: docker://liquibase/liquibase
-#     with:
-#        args: validate
-        
-#    - name: Run Quality Checks
-#      uses: docker://liquibase/liquibase
-#      with:
-#        args: checks run
-        
-#    - name: Review pending SQL changes
-#      uses: docker://liquibase/liquibase
-#      with:
-#        args: status --verbose --log-level=info
-    
-#    - name: Deploy SQL changes to DEV
-#      uses: docker://liquibase/liquibase
-#      with:
-#        args: update
+    - name:  Deploy SQL Changes to Dev
+      run:  liquibase update      
