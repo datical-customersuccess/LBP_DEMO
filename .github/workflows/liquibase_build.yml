@@ -4,7 +4,7 @@ name: LiquibaseProBuild
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the cicd branch
+  # Triggers the workflow on push or pull request events but only for the branch
   push:
     branches: [ jfrog ]
   pull_request:
@@ -32,8 +32,8 @@ jobs:
     container:
       image: lbdemo.jfrog.io/lblocal/liquibase
       credentials:
-        username: 
-        password:  
+        username: ${{secrets.JFROG_USERNAME}}
+        password: ${{secrets.JFROG_PASSWORD}}
     environment: 
       name: DEV
 
@@ -42,6 +42,12 @@ jobs:
     
     - name: Validate changelogs
       run: liquibase validate
+      
+    - name:  Run Quality Checks
+      run:  liquibase checks run
+      
+    - name:  Review Pending SQL Changes
+      run:  liquibase status --verbose --log-level=info
       
 #      uses: docker://liquibase/liquibase
 #     with:
