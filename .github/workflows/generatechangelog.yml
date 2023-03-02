@@ -1,0 +1,64 @@
+# This is a sample deploy script.
+
+name: LiquibaseProDeploy
+
+# Controls when the workflow will run
+# The liquibase_deploy.yml must be in the default (main) branch to trigger manually.
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description:  'Environment for deploy'
+        required:  true
+        default:  'TEST'
+        type:  choice
+        options:
+        - TEST
+        - PROD
+
+env:
+  ## Set environment variables
+  ## These variables are set at the Repo level.
+  LIQUIBASE_PRO_LICENSE_KEY: ${{secrets.LIQUIBASE_PRO_LICENSE_KEY}}
+  LIQUIBASE_COMMAND_USERNAME: ${{secrets.LIQUIBASE_COMMAND_USERNAME}}
+  LIQUIBASE_COMMAND_PASSWORD: ${{secrets.LIQUIBASE_COMMAND_PASSWORD}}
+  ##
+  ## The database URL is set at the environment level.
+  LIQUIBASE_COMMAND_URL: ${{secrets.LIQUIBASE_COMMAND_URL}}
+  ## 
+  LIQUIBASE_COMMAND_CHANGELOG_FILE: ./changelogs/dbchangelog.xml
+  ## LIQUIBASE_LOG_LEVEL: FINE
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  Liquibase-GenerateChangelog:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Liquibase GenerateChangelog
+      uses: liquibase-github-actions/generate-changelog@v4.19.0
+      with:
+        username: ${{secrets.LIQUIBASE_COMMAND_USERNAME}}
+        password: ${{secrets.LIQUIBASE_COMMAND_PASSWORD}}
+        url: ${{secrets.LIQUIBASE_COMMAND_URL}}
+        licenseKey: ${{secrets.LIQUIBASE_PRO_LICENSE_KEY}}
+        classpath: 'example/changelogs'
+        changelogFile: 'orachangelog.sql'
+# dataOutputDirectory: "" # Directory to write table data to
+# diffTypes: "" # Types of objects to compare
+# driver: "" # The JDBC driver class
+# driverPropertiesFile: "" # The JDBC driver properties file
+# excludeObjects: "" # Objects to exclude from diff
+# includeCatalog: "" # If true, the catalog will be included in generated changeSets
+# includeObjects: "" # Objects to include in diff
+# includeSchema: "" # If true, the schema will be included in generated changeSets
+# includeTablespace: "" # Include the tablespace attribute in the changelog
+# overwriteOutputFile: "" # Flag to allow overwriting of output changelog file
+        schemas: ${{ github.event.inputs.schemas }} # Schemas to include in diff
+        logLevel: INFO #DEBUG
