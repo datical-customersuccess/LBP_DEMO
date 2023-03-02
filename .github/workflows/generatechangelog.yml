@@ -1,6 +1,6 @@
 # This is a sample deploy script.
 
-name: LiquibaseProDeploy
+name: LiquibaseGenerateChangelog
 
 # Controls when the workflow will run
 # The liquibase_deploy.yml must be in the default (main) branch to trigger manually.
