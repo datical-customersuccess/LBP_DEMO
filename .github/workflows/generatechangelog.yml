@@ -49,7 +49,7 @@ jobs:
         url: ${{secrets.LIQUIBASE_COMMAND_URL}}
         licenseKey: ${{secrets.LIQUIBASE_PRO_LICENSE_KEY}}
 # classpath: 'example/changelogs'
-        changelogFile: 'orachangelog.sql'
+        changelogFile: '/github/workspace/orachangelog.sql'
 # dataOutputDirectory: "" # Directory to write table data to
 # diffTypes: "" # Types of objects to compare
 # driver: "" # The JDBC driver class
